@@ -9,14 +9,7 @@
     <style>
         body { margin: 0; padding: 0; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-        
-        
-        
-    </style>
-</head>
-<body>
-    <style>
-      .filter-group {
+        .filter-group {
           font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
           font-weight: 600;
           position: absolute;
@@ -25,7 +18,7 @@
           z-index: 1;
           border-radius: 3px;
           width: 160px;
-          color: #fff;
+          color: #ede4f3;
       }
 
       .filter-group input[type='checkbox']:first-child + label {
@@ -40,39 +33,54 @@
       .filter-group input[type='checkbox'] {
           display: none;
       }
-
+/* Filter legend */
       .filter-group input[type='checkbox'] + label {
-          background-color: #104735;
+          background-color: #dadada;
           display: block;
-          cursor: pointer;
+          cursor: grab;
           padding: 10px;
           border-bottom: 1px solid rgba(255, 255, 255, 0.25);
       }
-
+/* background color on click */
       .filter-group input[type='checkbox'] + label {
-          background-color: #007030;
+          background-color: #1bac3a;
           text-transform: capitalize;
       }
-
+/* actual button color */
       .filter-group input[type='checkbox'] + label:hover,
       .filter-group input[type='checkbox']:checked + label {
-          background-color: #007030;
+          background-color: #007030 ;
       }
 
       .filter-group input[type='checkbox']:checked + label:before {
           content: '✔';
           margin-right: 5px;
       }
+
+      /* Popup controls*/
+     .mapboxgl-popup-content{
+      background-color: #565256;
+      color: #fff;
+      opacity: .9;
+      text-align: center;
+
+      
+     }   
+    .mapboxgl-popup{
+      max-width: 400px !important;
+     }
     </style>
+</head>
+<body>
+
   <div id="map"></div>
       <!-- add filter group nav here  ( II.6) -->
       <nav id="filter-group" class="filter-group"></nav>
 
   <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoibWFja2dyYXkiLCJhIjoiY2x1bGhqcHM2MHR1YzJwbWlvemduZTBoZyJ9.wIuOEG5RDsurTccVqhSQqQ';
-      
-      /// ADD THE DATA HERE (II.2)
-      // GeoJSON that contains features that include an "icon" property
+    
+      // GeoJSON locations 
       var places = {
         "type": "FeatureCollection",
         "features": [
@@ -89,10 +97,10 @@
         "properties": {
           "icon": "square",
           "Year": "2020-2021",
-          "Classes Amount": "19",
-          "Projects Amount": "17",
-          "Projects Link": "https://www.dropbox.com/s/noctedz010d2twe/1%20pager_Troutdale-mbupdate092721.pdf?dl=0",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/26145", 
+          "Classes_Amount": "19",
+          "Projects_Amount": "17",
+          "Projects_Link": "https://www.dropbox.com/s/noctedz010d2twe/1%20pager_Troutdale-mbupdate092721.pdf?dl=0",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/26145", 
           "FID": 0,
           "AREA": 0,
           "PERIMETER": 0,
@@ -115,10 +123,10 @@
         "properties": {
           "icon": "square",
           "Year": "2009-2010",
-          "Classes Amount": "12",
-          "Projects Amount": "12",
-          "Projects Link": "https://sci.uoregon.edu/sites/default/files/1_pager_gresham.pdf",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/10382", 
+          "Classes_Amount": "12",
+          "Projects_Amount": "12",
+          "Projects_Link": "https://sci.uoregon.edu/sites/default/files/1_pager_gresham.pdf",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/10382", 
           "FID": 1,
           "AREA": 0,
           "PERIMETER": 0,
@@ -142,7 +150,7 @@
           "icon": "star",
           "Year": "2022",
           "Special Project": "Y",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/28524",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/28524",
           "FID": 2,
           "AREA": 0,
           "PERIMETER": 0,
@@ -166,7 +174,7 @@
           "icon": "star",
           "Year": "Fall 2023",
           "Special Project": "Y",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/29049",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/29049",
           "FID": 3,
           "AREA": 0,
           "PERIMETER": 0,
@@ -189,10 +197,10 @@
         "properties": {
           "icon": "square",
           "Year": "2016-2017",
-          "Classes Amount": "23",
-          "Projects Amount": "22", 
-          "Projects Link": "https://sci.uoregon.edu/sites/default/files/albany.pdf",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/22452",
+          "Classes_Amount": "23",
+          "Projects_Amount": "22", 
+          "Projects_Link": "https://sci.uoregon.edu/sites/default/files/albany.pdf",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/22452",
           "FID": 4,
           "AREA": 0,
           "PERIMETER": 0,
@@ -215,10 +223,10 @@
         "properties": {
           "icon": "square",
           "Year": "2019-2020",
-          "Classes Amount": "5",
-          "Projects Amount": "5", 
-          "Projects Link": "https://sci.uoregon.edu/sites/default/files/silverton.pdf",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/25327",
+          "Classes_Amount": "5",
+          "Projects_Amount": "5", 
+          "Projects_Link": "https://sci.uoregon.edu/sites/default/files/silverton.pdf",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/25327",
           "FID": 5,
           "AREA": 0,
           "PERIMETER": 0,
@@ -241,10 +249,10 @@
         "properties": {
           "icon": "square",
           "Year": "2010-2011 & 2023-2024",
-          "Classes Amount": "18 & 18",
-          "Projects Amount": "18 & 18", 
-          "Projects Link": "https://sci.uoregon.edu/sites/default/files/salem.pdf",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/11432",
+          "Classes_Amount": "18 & 18",
+          "Projects_Amount": "18 & 18", 
+          "Projects_Link": "https://sci.uoregon.edu/sites/default/files/salem.pdf",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/11432",
           "FID": 6,
           "AREA": 0,
           "PERIMETER": 0,
@@ -268,7 +276,7 @@
           "icon": "star",
           "Year": "2018-2019",
           "Special Project": "Y",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/24623",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/24623",
           "FID": 7,
           "AREA": 0,
           "PERIMETER": 0,
@@ -291,10 +299,10 @@
         "properties": {
           "icon": "square", 
           "Year": "2011-2012 & 2018-2019",
-          "Classes Amount": "22",
-          "Projects Amount": "22",
-          "Projects Link": "https://sci.uoregon.edu/sites/default/files/springfield.pdf",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/12608",
+          "Classes_Amount": "22",
+          "Projects_Amount": "22",
+          "Projects_Link": "https://sci.uoregon.edu/sites/default/files/springfield.pdf",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/12608",
           "FID": 8,
           "AREA": 0,
           "PERIMETER": 0,
@@ -317,10 +325,10 @@
         "properties": {
           "icon": "square",
           "Year": "2013-2014",
-          "Classes Amount": "17",
-          "Projects Amount": "17",
-          "Projects Link": "https://sci.uoregon.edu/sites/default/files/springfield.pdf",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/16076",
+          "Classes_Amount": "17",
+          "Projects_Amount": "17",
+          "Projects_Link": "https://sci.uoregon.edu/sites/default/files/springfield.pdf",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/16076",
           "FID": 9,
           "AREA": 0,
           "PERIMETER": 0,
@@ -344,8 +352,8 @@
           "icon": "star",
           "Year": "Winter 2020",
           "Special Project": "Y",
-          "Projects Link": "https://sci.uoregon.edu/sites/default/files/springfield.pdf",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/25400",
+          "Projects_Link": "https://sci.uoregon.edu/sites/default/files/springfield.pdf",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/25400",
           "FID": 10,
           "AREA": 0,
           "PERIMETER": 0,
@@ -368,10 +376,10 @@
         "properties": {
           "icon": "square",
           "Year": "2022-2023",
-          "Classes Amount": "4",
-          "Projects Amount": "5",
-          "Projects Link": "https://sci.uoregon.edu/sites/default/files/2023-10/1_pager_sisters.pdf",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/27905",
+          "Classes_Amount": "4",
+          "Projects_Amount": "5",
+          "Projects_Link": "https://sci.uoregon.edu/sites/default/files/2023-10/1_pager_sisters.pdf",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/27905",
           "FID": 11,
           "AREA": 0,
           "PERIMETER": 0,
@@ -394,10 +402,10 @@
         "properties": {
           "icon": "square",
           "Year": "2015-2016",
-          "Classes Amount": "19",
-          "Projects Amount": "24",
-          "Projects Link": "https://sci.uoregon.edu/sites/default/files/redmond.pdf",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/19989",
+          "Classes_Amount": "19",
+          "Projects_Amount": "24",
+          "Projects_Link": "https://sci.uoregon.edu/sites/default/files/redmond.pdf",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/19989",
           "FID": 12,
           "AREA": 0,
           "PERIMETER": 0,
@@ -420,10 +428,10 @@
         "properties": {
           "icon": "square",
           "Year": "2017-2018",
-          "Classes Amount": "9",
-          "Projects Amount": "12",
-          "Projects Link": "https://sci.uoregon.edu/sites/default/files/la_pine_2.pdf",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/23229",
+          "Classes_Amount": "9",
+          "Projects_Amount": "12",
+          "Projects_Link": "https://sci.uoregon.edu/sites/default/files/la_pine_2.pdf",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/23229",
           "FID": 13,
           "AREA": 0,
           "PERIMETER": 0,
@@ -446,10 +454,10 @@
         "properties": {
           "icon": "square",
           "Year": "2021-2022",
-          "Classes Amount": "7",
-          "Projects Amount": "5",
-          "Projects Link": "https://sci.uoregon.edu/sites/default/files/1_pager_hermiston_v2.pdf",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/27098",
+          "Classes_Amount": "7",
+          "Projects_Amount": "5",
+          "Projects_Link": "https://sci.uoregon.edu/sites/default/files/1_pager_hermiston_v2.pdf",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/27098",
           "FID": 14,
           "AREA": 0,
           "PERIMETER": 0,
@@ -473,10 +481,10 @@
         "properties": {
           "icon": "square",
           "Year": "2020-2021",
-          "Classes Amount": "19",
-          "Projects Amount": "17",
-          "Projects Link": "https://www.dropbox.com/s/noctedz010d2twe/1%20pager_Troutdale-mbupdate092721",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/26145",
+          "Classes_Amount": "19",
+          "Projects_Amount": "17",
+          "Projects_Link": "https://www.dropbox.com/s/noctedz010d2twe/1%20pager_Troutdale-mbupdate092721",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/26145",
           "OBJECTID": 48,
           "AREA": 0,
           "PERIMETER": 0,
@@ -500,10 +508,10 @@
         "properties": {
           "icon": "square",
           "Year": "2017-2018",
-          "Classes Amount": "26",
-          "Projects Amount": "24",
-          "Projects Link": "https://sci.uoregon.edu/sites/default/files/trimet.pdf",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/23230",
+          "Classes_Amount": "26",
+          "Projects_Amount": "24",
+          "Projects_Link": "https://sci.uoregon.edu/sites/default/files/trimet.pdf",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/23230",
           "OBJECTID": 50,
           "AREA": 0,
           "PERIMETER": 0,
@@ -527,8 +535,8 @@
           "icon": "star",
           "Year": "2014-2015",
           "Special Project": "Y",
-          "Projects Link": "https://sci.uoregon.edu/sites/default/files/metro_area.pdf",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/22534",
+          "Projects_Link": "https://sci.uoregon.edu/sites/default/files/metro_area.pdf",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/22534",
           "OBJECTID": 50,
           "AREA": 0,
           "PERIMETER": 0,
@@ -553,7 +561,7 @@
           "icon": "star",
           "Year": "2022",
           "Special Project": "Y",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/28524",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/28524",
           "OBJECTID": 86,
           "AREA": 0,
           "PERIMETER": 0,
@@ -577,28 +585,30 @@
         "properties": {
           "icon": "square",
           "Year": "2019-2020",
-          "Classes Amount": "19",
-          "Projects Amount": "23",
-          "Projects Link": "https://sci.uoregon.edu/sites/default/files/1_pager_ltd.pdf",
-          "Reports Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/24622",
+          "Classes_Amount": "19",
+          "Projects_Amount": "23",
+          "Projects_Link": "https://sci.uoregon.edu/sites/default/files/1_pager_ltd.pdf",
+          "Reports_Link": "https://scholarsbank.uoregon.edu/xmlui/handle/1794/24622",
           "OBJECTID": 339,
           "AREA": 0,
           "PERIMETER": 0,
           "CITIES_": 339,
           "CITIES_ID": 474,
-          "CITY": "Lane Transit District", //originally Eugene
+          "CITY": "Lane Transit District", 
           "FLAG": 1,
           "GlobalID": "{8801370c-1a30-41ae-a9bf-3189ddcd79c7}"
         }
       }
     ]}
-
+// MAP CONTAINER!!//
     var filterGroup = document.getElementById('filter-group');
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mackgray/clw9kq5sn009001rdhi827jmw',
         center: [-120.224, 44.169],
         zoom: 6.2,
+        maxZoom: 10,
+        minZoom: 5.5
     });
 
     // Map's On 'load' function.
@@ -618,9 +628,9 @@
             'filter': ['==', 'icon', "square"], 
             'source': 'places',
             'layout': {
-                'icon-image': 'noun_square_color',
+                'icon-image': 'noun_square_color_grey',
                 'icon-allow-overlap': true,
-                'icon-size': 0.12
+                'icon-size': 0.18
             },
         });
 
@@ -632,9 +642,9 @@
             'source': 'places',
             'filter': ['==', 'icon', "star"], 
             'layout': {
-                'icon-image': 'noun_star_color',
+                'icon-image': 'noun_star',
                 'icon-allow-overlap': true,
-                'icon-size': 0.2
+                'icon-size': 0.25
             },
         });
         
@@ -643,7 +653,7 @@
        map.on('click', 'star_layer', (e) => {
             /// Description pulls from JSON properties
             const coordinates = e.features[0].geometry.coordinates.slice();
-            const description = "City: " +e.features[0].properties.CITY + "<br> Year: " +e.features[0].properties.Year  + "<br> Project Type: Special" + "<br> Projects Amount: " +e.features[0].properties.Projects_Amount + "<br> Reports Link: " +e.features[0].properties.Reports_Link + "<br> Projects Link: " +e.features[0].properties.Projects_Link
+            const description = "<strong>Project Type: Special</strong>" + "<br> City: " +e.features[0].properties.CITY + "<br> Year: " +e.features[0].properties.Year  +  "<br> Reports Link: <a href = " +  e.features[0].properties.Reports_Link + ">" + e.features[0].properties.Reports_Link  + "<br> Projects Link: <a href = " +e.features[0].properties.Projects_Link +  ">" + e.features[0].properties.Projects_Link
 
             while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -659,7 +669,7 @@
         map.on('click', 'square_layer', (e) => {
             // Description pulls from JSON properties
             const coordinates = e.features[0].geometry.coordinates.slice();
-            const description = "City: " +e.features[0].properties.CITY + "<br> Year: " +e.features[0].properties.Year + "<br> Classes Amount: " +e.features[0].properties.Classes_Amount + "<br> Projects Amount: " +e.features[0].properties.Projects_Amount + "<br> Reports Link: " +e.features[0].properties.Reports_Link + "<br> Projects Link: " +e.features[0].properties.Projects_Link
+            const description = "City: " +e.features[0].properties.CITY + "<br> Year: " +e.features[0].properties.Year + "<br> Classes Amount: " +e.features[0].properties.Classes_Amount + "<br> Projects Amount: " +e.features[0].properties.Projects_Amount + "<br> Reports Link: <a href = " + e.features[0].properties.Reports_Link + ">" + e.features[0].properties.Reports_Link + "<br> Projects Link: <a href = " +e.features[0].properties.Projects_Link +  ">" + e.features[0].properties.Projects_Link
 
             while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -670,6 +680,7 @@
                 .setHTML(description)
                 .addTo(map);
         });
+
         // Change the cursor to a pointer when the mouse is over the places layer.
         map.on('mouseenter', 'places', () => {
             map.getCanvas().style.cursor = 'pointer';
@@ -721,7 +732,11 @@
                   e.target.checked ? 'visible' : 'none'
               );
           });
-
+          // Navigation Control
+          // Need to move the position to top left
+          map.addControl(new mapboxgl.NavigationControl(),'top-left');
+          
+            // yay! end of the code!! :)  
   </script>
 
 </body>

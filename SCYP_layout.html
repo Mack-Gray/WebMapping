@@ -16,7 +16,7 @@ From https://medium.com/nyc-planning-digital/a-versatile-layout-for-full-screen-
   
     <!-- CSS Links -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css" rel="stylesheet" />
-    <link href="VersitileLayout.css" rel="stylesheet" />
+    <link href="SCYP_layout.css" rel="stylesheet" />
     
 
 </head>
@@ -24,33 +24,39 @@ From https://medium.com/nyc-planning-digital/a-versatile-layout-for-full-screen-
 <body>
     <!-- Site header-->
     <div class="site-header">
-        <strong class="site-title">SCYP Partners</strong>
+        <strong class="site-title">Sustainable Cities Year Plan Partners Map</strong>
     </div>
 
     <div class="site-main grid-x has-content-open">
 
-        <div class="search-container cell medium-3 large-2">
+        <!-- <div class="search-container cell medium-3 large-2">
             <input type="text" placeholder="Search..." class="search" />
-            <ol class="search-results no-bullet">
-                <li>Projects</li>
-                <li>Classes</li>
-                <li>Special Projects</li>
-            </ol>
-        </div>
-        
-        <div class="map-container cell medium-auto large-order-2">
-             <!--  ADD iframe here, inside the versitle layout's map container  -->
-             <iframe src="filter-markers.html" title="SCYP Map"></iframe>
-        </div>
-
-        <!--  Sidebar panel  -->
-        <div class="sidebar cell medium-3 large-2 large-order-1 show-for-medium">
-            <h5>Partnerships by Category</h5>
-            <ul>
+            <ul class="search-results no-bullet">
                 <li>Projects</li>
                 <li>Classes</li>
                 <li>Special Projects</li>
             </ul>
+        </div> -->
+        
+        <div class="map-container cell medium-auto large-order-2">
+             <!--  ADD iframe here, inside the versitle layout's map container  -->
+             <iframe src="SCYP_filter.html" title="SCYP Map"></iframe>
+        </div>
+
+        <!--  Sidebar panel  -->
+        <div class="sidebar cell medium-3 large-2 large-order-1 show-for-medium">
+            <br>
+            <p> <strong> How To Use The Map</strong></p>
+            <p> Explore the points to find out how many projects have taken place with each partner.</p>
+            <p>Interact with points on the map to find out more information.</p>
+            <p>Each point contains links to the projects and reports</p>
+
+            <!-- <h5>Partnerships by Category</h5>
+            <ul>
+                <li>Projects</li>
+                <li>Classes</li>
+                <li>Special Projects</li>
+            </ul> -->
 
             <hr />
             <a class="content-link" href="#">Open description panel</a>
@@ -61,7 +67,7 @@ From https://medium.com/nyc-planning-digital/a-versatile-layout-for-full-screen-
         </div>
         
         <!--  Content panel  -->
-        <div class="content cell large-5 large-order-3">
+        <div class="content cell large-3 large-order-3">
             <h2>Sustainable City Year Program</h2>
             <p> The Sustainable Cities Year Program pairs the University of Oregon with Oregon cities to create real change using innovative ideas, while also giving students experience for the workforce. </p>
            <p><strong> Explore the map of SCYP partners and cities to learn more.</strong></p>
@@ -75,7 +81,7 @@ From https://medium.com/nyc-planning-digital/a-versatile-layout-for-full-screen-
     <script>
        
         $(document).ready(function() {
-
+                // content close button
             $('.content-close-button').click(function() {
                 $('.content-close-button').hide();
                 $('.content').hide();
